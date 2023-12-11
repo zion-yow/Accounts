@@ -38,11 +38,11 @@ class Bill(object):
     # classifier
     def classify_expense(self):
         # try:
-        response = openai.chat.completions.create(
-            model='gpt-3.5-turbo-instruct-0914',#"gpt-4.0",
-            messages=[{"role": "system", "content": "你是一个根据订单记录对订单进行分类的智能助力。"},
-                    {"role": "user", "content": self.tail_txts}],
-            max_tokens=2048
+        response = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',#"gpt-4.0",
+            prompt=[{"role": "system", "content": "你是一个根据订单记录对订单进行分类的智能助力。"},
+                    {"role": "user", "content": self.asking_texts}],
+            max_tokens=128
         )
         return response['choices'][0]['message']['content']
         # except Exception as e:
